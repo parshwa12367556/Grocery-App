@@ -1,0 +1,311 @@
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+   }
+
+   body {
+       font-family: 'Inter', sans-serif;
+       background-color: #fefaf5;
+       color: #1e2a2e;
+       scroll-behavior: smooth;
+   }
+
+   .container {
+       max-width: 1280px;
+       padding-left: 24px;
+       padding-right: 24px;
+   }
+
+   /* ========== PRODUCT DETAIL SECTION ========== */
+   .product-detail {
+       background: white;
+       border-radius: 42px;
+       padding: 2rem;
+       margin-top: 2rem;
+       margin-bottom: 2rem;
+       box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05);
+       transition: all 0.2s;
+   }
+
+   .product-image {
+       width: 100%;
+       border-radius: 32px;
+       object-fit: cover;
+       aspect-ratio: 1 / 1;
+       box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.15);
+       transition: transform 0.3s ease;
+   }
+
+   .product-image:hover {
+       transform: scale(1.01);
+   }
+
+   .category-badge {
+       display: inline-block;
+       background: #eef3e9;
+       color: #2c6e3c;
+       padding: 6px 16px;
+       border-radius: 60px;
+       font-size: 0.8rem;
+       font-weight: 600;
+       margin-bottom: 1rem;
+       letter-spacing: -0.2px;
+   }
+
+   .product-title {
+       font-size: 2.2rem;
+       font-weight: 800;
+       color: #1f2a3e;
+       margin-bottom: 0.75rem;
+       letter-spacing: -0.02em;
+   }
+
+   .product-price {
+       font-size: 2rem;
+       font-weight: 800;
+       color: #2c6e3c;
+       margin-bottom: 1rem;
+   }
+
+   .stock-info {
+       display: inline-flex;
+       align-items: center;
+       background: #f8faf7;
+       padding: 6px 14px;
+       border-radius: 40px;
+       font-size: 0.85rem;
+       font-weight: 600;
+       margin-bottom: 1.25rem;
+   }
+
+   .stock-info i {
+       font-size: 1rem;
+   }
+
+   .product-description {
+       background: #fefaf5;
+       padding: 1rem 1rem;
+       border-radius: 24px;
+       margin: 1rem 0;
+       line-height: 1.5;
+       color: #334155;
+   }
+
+   .quantity-selector {
+       display: flex;
+       align-items: center;
+       gap: 1rem;
+       margin: 1.5rem 0;
+       flex-wrap: wrap;
+   }
+
+   .quantity-selector label {
+       font-weight: 700;
+       margin-bottom: 0;
+   }
+
+   .quantity-input {
+       width: 90px;
+       padding: 10px 12px;
+       border-radius: 60px;
+       border: 1.5px solid #e2e8f0;
+       text-align: center;
+       font-weight: 600;
+       background: white;
+       transition: all 0.2s;
+   }
+
+   .quantity-input:focus {
+       border-color: #4c9a2a;
+       outline: none;
+       box-shadow: 0 0 0 3px rgba(76, 154, 42, 0.2);
+   }
+
+   .btn-add-cart {
+       background: #2c6e3c;
+       color: white;
+       border: none;
+       padding: 14px 28px;
+       border-radius: 60px;
+       font-weight: 700;
+       font-size: 1rem;
+       transition: all 0.25s;
+       display: inline-flex;
+       align-items: center;
+       justify-content: center;
+       gap: 10px;
+       box-shadow: 0 8px 18px rgba(44, 110, 60, 0.2);
+       width: 100%;
+       max-width: 260px;
+   }
+
+   .btn-add-cart:hover:not(:disabled) {
+       background: #1e532b;
+       transform: translateY(-3px);
+       box-shadow: 0 14px 24px rgba(44, 110, 60, 0.3);
+   }
+
+   .btn-add-cart:disabled {
+       background: #b9cfb0;
+       cursor: not-allowed;
+       opacity: 0.7;
+   }
+
+   .shipping-info {
+       background: #f9f9f4;
+       border-radius: 24px;
+       padding: 1rem 1.2rem;
+       margin-top: 1rem;
+   }
+
+   .shipping-info h5 {
+       font-weight: 700;
+       color: #1f2a3e;
+   }
+
+   /* ========== RELATED PRODUCTS (modern cards) ========== */
+   .related-section {
+       margin: 3rem 0 2rem;
+   }
+
+   .related-section h3 {
+       font-size: 1.8rem;
+       font-weight: 700;
+       margin-bottom: 1.8rem;
+       border-left: 5px solid #4c9a2a;
+       padding-left: 1rem;
+   }
+
+   .related-card {
+       background: white;
+       border-radius: 28px;
+       overflow: hidden;
+       transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+       box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.08);
+       height: 100%;
+       border: 1px solid rgba(0, 0, 0, 0.04);
+   }
+
+   .related-card:hover {
+       transform: translateY(-6px);
+       box-shadow: 0 22px 32px -14px rgba(0, 0, 0, 0.12);
+   }
+
+   .related-img {
+       width: 100%;
+       height: 200px;
+       object-fit: cover;
+       transition: transform 0.3s;
+   }
+
+   .related-card:hover .related-img {
+       transform: scale(1.02);
+   }
+
+   .related-body {
+       padding: 1rem 1rem 1.2rem;
+   }
+
+   .related-title {
+       font-weight: 700;
+       font-size: 1rem;
+       margin-bottom: 0.5rem;
+   }
+
+   .related-price {
+       font-weight: 800;
+       color: #2c6e3c;
+       font-size: 1.1rem;
+   }
+
+   .btn-related {
+       background: #f5f2ea;
+       border: none;
+       padding: 8px 0;
+       width: 100%;
+       border-radius: 60px;
+       font-weight: 600;
+       font-size: 0.85rem;
+       color: #2c6e3c;
+       transition: all 0.2s;
+       margin-top: 10px;
+   }
+
+   .btn-related:hover {
+       background: #2c6e3c;
+       color: white;
+   }
+
+   /* ========== FOOTER ========== */
+   footer {
+       background: #1e2a2e;
+       color: #e9ecef;
+       padding: 60px 0 30px;
+       border-top-left-radius: 42px;
+       border-top-right-radius: 42px;
+       margin-top: 70px;
+   }
+
+   footer h5 {
+       font-weight: 700;
+       margin-bottom: 1.2rem;
+       color: #d4e6c3;
+   }
+
+   footer a {
+       color: #cbd5e0;
+       text-decoration: none;
+       transition: color 0.2s;
+   }
+
+   footer a:hover {
+       color: #a3e635;
+       text-decoration: underline;
+   }
+
+   hr {
+       opacity: 0.2;
+       background-color: #a3b5a4;
+   }
+
+   @media (max-width: 768px) {
+       .product-detail {
+           padding: 1.2rem;
+       }
+
+       .product-title {
+           font-size: 1.6rem;
+       }
+
+       .product-price {
+           font-size: 1.6rem;
+       }
+
+       .btn-add-cart {
+           max-width: 100%;
+       }
+   }
+
+   .nav-link {
+       transition: all 0.3s ease;
+   }
+
+   .nav-link:hover {
+       color: #00ff88 !important;
+       transform: scale(1.05);
+   }
+
+   .navbar-brand {
+       font-size: 1.5rem;
+       letter-spacing: 1px;
+   }
+
+   .btn-success {
+       background: linear-gradient(45deg, #00c853, #64dd17);
+       border: none;
+   }
+
+   .btn-success:hover {
+       background: linear-gradient(45deg, #00e676, #76ff03);
+   }

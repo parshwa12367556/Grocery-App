@@ -1,0 +1,74 @@
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .error-container {
+        text-align: center;
+        color: white;
+        animation: fadeInUp 0.5s ease;
+    }
+
+    .error-code {
+        font-size: 8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .error-message {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    .btn-home {
+        background-color: #ffc107;
+        color: #333;
+        padding: 12px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .btn-home:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .nav-link {
+        transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: #00ff88 !important;
+        transform: scale(1.05);
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+
+    .btn-success {
+        background: linear-gradient(45deg, #00c853, #64dd17);
+        border: none;
+    }
+
+    .btn-success:hover {
+        background: linear-gradient(45deg, #00e676, #76ff03);
+    }

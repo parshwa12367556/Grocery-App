@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order - Grocery Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='shop/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='shop/track.css') }}">
+</head>
+
+<body>
+    <!-- Modern Navbar (Without Search Bar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+                🛒 GroceryHub
+            </a>
+            <!-- Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Left Menu -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('product_bp.products') }}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('customer.about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('customer.contact') }}">Contact</a>
+                    </li>
+                </ul>
+                <!-- Right Side -->
+                <ul class="navbar-nav align-items-center">
+                    <!-- Cart -->
+                    <li class="nav-item me-3">
+                        <a class="nav-link position-relative" href="{{ url_for('customer.cart') }}">
+                            🛍️
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ cart_count }}
+                            </span>
+                        </a>
+                    </li>
+                    <!-- Login/Register/Profile -->
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link text-white fw-bold me-2" href="{{ url_for('customer.profile') }}">
+                            <i class="fas fa-user-circle me-1"></i> {{ current_user.username }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-danger rounded-pill" href="{{ url_for('customer.logout') }}">
+                            Logout
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light me-2 rounded-pill" href="{{ url_for('customer.login') }}">
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-success rounded-pill" href="{{ url_for('customer.register') }}">
+                            Sign Up
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="container mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ 'success' if category == 'success' else ('danger' if category == 'error' else 'info') }} alert-dismissible fade show"
+            role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="container mb-5 mt-4">
+        <div class="tracking-header shadow-sm">
+            <h2 class="mb-2 fw-bold"><i class="fas fa-map-marked-alt me-2"></i> Track Your Order</h2>
+            <p class="mb-0 text-white-50" style="font-weight: 500;">Enter your Tracking ID to see the current status of
+                your
+                delivery</p>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <div class="card shadow-sm border-0" style="border-radius: 16px; background: #fff;">
+                    <div class="card-body p-4">
+                        <form action="{{ url_for('customer.track_order') }}" method="GET" class="d-flex">
+                            <input type="text" name="id" class="form-control form-control-lg me-2 border-2"
+                                placeholder="e.g. TRK-12345678" value="{{ search_id or '' }}" required
+                                style="border-radius: 12px;">
+                            <button type="submit" class="btn btn-success btn-lg px-4 fw-bold"
+                                style="border-radius: 12px;"><i class="fas fa-search me-1"></i> Track</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if order %}
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm border-0" style="border-radius: 20px;">
+                    <div class="card-body p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-4">
+                            <h4 class="mb-0 fw-bold">Tracking ID: <span class="text-primary">{{ order.tracking_id
+                                    }}</span>
+                            </h4>
+                            <span
+                                class="badge bg-{{ 'danger' if order.status == 'cancelled' else 'success' if order.status == 'delivered' else 'warning' }} fs-6 px-4 py-2 rounded-pill shadow-sm">
+                                {{ order.status.capitalize() }}
+                            </span>
+                        </div>
+
+                        <p class="text-muted fw-bold mb-4"><i class="far fa-clock me-1"></i> Order Placed: {{
+                            order.created_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+
+                        {% if order.status == 'cancelled' %}
+                        <div class="alert alert-danger text-center p-4 rounded-3 border-0 shadow-sm">
+                            <i class="fas fa-times-circle fa-3x mb-3"></i>
+                            <br><strong class="fs-5">This order has been cancelled.</strong>
+                        </div>
+                        {% else %}
+
+                        <!-- Dynamic Progress Bar Logic -->
+                        {% set statuses = ['pending', 'processing', 'shipped', 'delivered'] %}
+                        {% set current_idx = statuses.index(order.status) if order.status in statuses else 0 %}
+
+                        <div class="step-container">
+                            <div class="progress-bar-custom progress-{{ current_idx }}"></div>
+
+                            <div class="step {{ 'completed' if current_idx >= 0 else '' }}">
+                                <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+                                <div class="step-label">Order Placed</div>
+                            </div>
+                            <div class="step {{ 'completed' if current_idx >= 1 else '' }}">
+                                <div class="step-icon"><i class="fas fa-box-open"></i></div>
+                                <div class="step-label">Processing</div>
+                            </div>
+                            <div class="step {{ 'completed' if current_idx >= 2 else '' }}">
+                                <div class="step-icon"><i class="fas fa-truck"></i></div>
+                                <div class="step-label">Shipped</div>
+                            </div>
+                            <div class="step {{ 'completed' if current_idx == 3 else '' }}">
+                                <div class="step-icon"><i class="fas fa-home"></i></div>
+                                <div class="step-label">Delivered</div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="row mt-5 pt-4 border-top bg-light rounded-4 p-4">
+                            <div class="col-md-6 mb-3">
+                                <h6 class="fw-bold text-muted text-uppercase mb-3" style="letter-spacing: 1px;"><i
+                                        class="fas fa-map-marker-alt me-2"></i>Delivery Information</h6>
+                                {% if current_user.is_authenticated and (current_user.id == order.user_id or
+                                current_user.is_admin) %}
+                                <p class="mb-1 fw-bold"><i class="fas fa-user me-2 text-success"></i> {{
+                                    order.user.username
+                                    }}</p>
+                                <p class="mb-1"><i class="fas fa-home me-2 text-success"></i> {{ order.shipping_address
+                                    }}
+                                </p>
+                                <p class="mb-1"><i class="fas fa-phone me-2 text-success"></i> {{ order.phone }}</p>
+                                {% else %}
+                                <p class="mb-1"><i class="fas fa-lock me-2 text-warning"></i> Details hidden for
+                                    privacy.
+                                </p>
+                                <p class="text-muted small">Only the buyer can see full shipping details.</p>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h6 class="fw-bold text-muted text-uppercase mb-3" style="letter-spacing: 1px;"><i
+                                        class="fas fa-motorcycle me-2"></i>Delivery Executive</h6>
+                                {% if order.delivery_person %}
+                                <p class="mb-1 fw-bold"><i class="fas fa-id-badge me-2 text-primary"></i> {{
+                                    order.delivery_person.name }}</p>
+                                {% if order.status in ['shipped', 'processing'] %}
+                                <p class="mb-1"><i class="fas fa-car me-2 text-primary"></i> {{
+                                    order.delivery_person.vehicle_number }}</p>
+                                {% endif %}
+                                {% else %}
+                                <p class="text-muted"><i class="fas fa-clock me-2"></i> Assigning a delivery partner
+                                    soon...
+                                </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>About Grocery Store</h5>
+                    <p>We provide fresh, organic, and high-quality grocery products delivered to your doorstep.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url_for('customer.about') }}">About Us</a></li>
+                        <li><a href="{{ url_for('customer.contact') }}">Contact Us</a></li>
+                        <li><a href="{{ url_for('product_bp.products') }}">Products</a></li>
+                        <li><a href="{{ url_for('customer.cart') }}">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Info</h5>
+                    <p><i class="fas fa-phone me-2"></i> +1 234 567 890</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@grocerystore.com</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2024 Grocery Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

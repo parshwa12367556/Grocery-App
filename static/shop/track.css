@@ -1,0 +1,102 @@
+        .tracking-header {
+            background: linear-gradient(135deg, #2b6e3c, #4c9a2a);
+            color: white;
+            padding: 40px 0;
+            border-radius: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .step-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 40px;
+            margin-top: 30px;
+        }
+
+        .step-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            z-index: 1;
+            border-radius: 10px;
+        }
+
+        .progress-bar-custom {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            height: 6px;
+            background: #2b6e3c;
+            z-index: 2;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .step {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            width: 25%;
+        }
+
+        .step-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #e9ecef;
+            color: #6c757d;
+            line-height: 38px;
+            font-size: 18px;
+            margin: 0 auto 10px;
+            border: 4px solid white;
+            transition: all 0.3s;
+            box-shadow: 0 0 0 2px #e9ecef;
+        }
+
+        .step.active .step-icon {
+            background: #2b6e3c;
+            color: white;
+            border-color: white;
+            box-shadow: 0 0 0 2px #2b6e3c;
+        }
+
+        .step.completed .step-icon {
+            background: #4c9a2a;
+            color: white;
+            border-color: white;
+            box-shadow: 0 0 0 2px #4c9a2a;
+        }
+
+        .step-label {
+            font-weight: 600;
+            color: #6c757d;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .step.active .step-label,
+        .step.completed .step-label {
+            color: #2b6e3c;
+        }
+
+        .progress-0 {
+            width: 0%;
+        }
+
+        .progress-1 {
+            width: 33.33%;
+        }
+
+        .progress-2 {
+            width: 66.66%;
+        }
+
+        .progress-3 {
+            width: 100%;
+        }

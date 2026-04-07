@@ -1,0 +1,57 @@
+Flask==2.3.2
+Flask-SQLAlchemy==3.0.5
+Flask-Login==0.6.2
+Werkzeug==2.3.4
+Pillow==10.0.0
+python-dotenv==1.0.0
+# Core Framework
+Flask==2.3.2
+Flask-SQLAlchemy==3.0.5
+Flask-Login==0.6.2
+
+# Utilities
+Werkzeug==2.3.4
+Pillow==10.0.0
+python-dotenv==1.0.0
+
+# Optional but recommended for production
+# gunicorn==21.2.0  # For production deployment
+# psycopg2-binary==2.9.7  # If using PostgreSQL instead of SQLite
+
+# Production Server
+gunicorn==21.2.0
+
+# PostgreSQL Support (if switching from SQLite)
+psycopg2-binary==2.9.7
+
+# Additional Security
+Flask-Talisman==1.1.0
+Flask-CORS==4.0.0
+
+# Caching
+Flask-Caching==2.1.0
+
+. Fake or Low-Quality Products
+The Solution: Move away from an "open marketplace" where anyone can sell, to a Curated/Managed Marketplace.
+How to implement: Implement strict KYC (Know Your Customer) and quality checks for sellers. Add a "Verified Authentic" badge on products sourced directly from brands or trusted local farms. For your grocery app, because you are managing the inventory directly (Product table) rather than third-party sellers, you completely eliminate this issue!
+2. Delivery Issues
+The Solution: Better logistics tracking and accountability.
+How to implement: Use OTP-based delivery confirmation so drivers cannot mark items as "delivered" if they aren't. Provide real-time driver tracking. You are actually already solving this in your app by having a dedicated DeliveryPerson model and assigning drivers directly to orders in the admin panel!
+3. Return & Refund Problems
+The Solution: Automated, instant trust-based refunds.
+How to implement: For customers with a good buying history, issue an "Instant Refund" to a store-credit wallet the moment the delivery driver scans the return pickup. Make return policies incredibly visible on the product_detail.html page so there are no surprises.
+4. Price Manipulation (Fake Discounts)
+The Solution: Radical transparency.
+How to implement: Build a native "Price History" chart on the product page. Show the user exactly what the price has been over the last 30 days. If users see you are being transparent about price fluctuations, their trust in your platform will skyrocket compared to Amazon.
+5. Too Many Sellers (Confusion)
+The Solution: The "Single Listing" architecture.
+How to implement: Never allow multiple listings for the exact same barcode/product. Group them into one clean product page and use an algorithm to automatically select the "Best Seller" (based on rating, delivery speed, and price) to feature in the "Add to Cart" box.
+6. Customer Support Issues
+The Solution: Human-first escalation.
+How to implement: While chatbots are great for checking order status, there should always be a 1-click "Talk to a Human" button. You already built a great start for this with your Feedback model, specifically the contact_requested = True checkbox, which ensures a human actually follows up with frustrated customers!
+7. Hidden Charges
+The Solution: Upfront Cart Calculations.
+How to implement: Never wait until the final checkout screen to add fees. In your app, you did this perfectly by putting an alert right on the checkout page: "Free delivery on orders over ₹50!" You could even enhance this by adding a progress bar in the cart saying "Add ₹15 more for free delivery!" so the user feels in control.
+8. Addiction & Over-Spending
+The Solution: Digital Wellbeing features.
+How to implement: Allow users to set a "Monthly Grocery Budget" in their profile settings. If their cart exceeds the budget, simply show a gentle warning. Furthermore, allow users to easily toggle off marketing push notifications in their profile (which you already added to your profile.html mockup!).

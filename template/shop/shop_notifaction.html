@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Grocery Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='shop/notification.css') }}">
+</head>
+<body>
+     <!-- Modern Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+                🛒 GroceryHub
+            </a>
+
+            <!-- Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <!-- Left Menu -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('product_bp.products') }}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('customer.about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('customer.contact') }}">Contact</a>
+                    </li>
+                </ul>
+
+                <!-- Right Side -->
+                <ul class="navbar-nav align-items-center">
+
+                    <!-- Cart -->
+                    <li class="nav-item me-3">
+                        <a class="nav-link position-relative" href="{{ url_for('customer.cart') }}">
+                            🛍️
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ cart_count }}
+                            </span>
+                        </a>
+                    </li>
+
+                    <!-- Login/Register/Profile -->
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link text-white fw-bold me-2" href="{{ url_for('customer.profile') }}">
+                            <i class="fas fa-user-circle me-1"></i> {{ current_user.username }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-danger rounded-pill" href="{{ url_for('customer.logout') }}">
+                            Logout
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light me-2 rounded-pill" href="{{ url_for('customer.login') }}">
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-success rounded-pill" href="{{ url_for('customer.register') }}">
+                            Sign Up
+                        </a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-bell me-3"></i>Notifications</h1>
+            <p>Stay updated with your orders and offers</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="notification-item notification-unread">
+                    <div class="notification-title">
+                        <i class="fas fa-truck text-success me-2"></i>
+                        Order #ORD-12345 has been shipped!
+                    </div>
+                    <p>Your order is out for delivery. Estimated delivery: Jan 17, 2024</p>
+                    <div class="notification-time">2 hours ago</div>
+                </div>
+                
+                <div class="notification-item notification-unread">
+                    <div class="notification-title">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        Order #ORD-12344 delivered successfully
+                    </div>
+                    <p>Thank you for shopping with us! Please share your feedback.</p>
+                    <div class="notification-time">Yesterday</div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-title">
+                        <i class="fas fa-tag text-warning me-2"></i>
+                        Weekend Sale - Up to 30% off!
+                    </div>
+                    <p>Don't miss out on our weekend special offers on fresh fruits and vegetables.</p>
+                    <div class="notification-time">2 days ago</div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-title">
+                        <i class="fas fa-gift text-danger me-2"></i>
+                        New Year Special Offer
+                    </div>
+                    <p>Get free delivery on orders above ₹50. Limited time offer!</p>
+                    <div class="notification-time">5 days ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>...</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

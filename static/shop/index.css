@@ -1,0 +1,375 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: 'Inter', sans-serif;
+     background-color: #fefaf5;
+     /* warm off-white background */
+     color: #1f2a3e;
+     scroll-behavior: smooth;
+ }
+
+ /* container max-width for better readability */
+ .container {
+     max-width: 1280px;
+     padding-left: 24px;
+     padding-right: 24px;
+ }
+
+ /* ========== HERO SECTION - fresh, bold, leafy vibe ========== */
+ .hero-section {
+     background: linear-gradient(105deg, #e9f5e6 0%, #d4e9d0 100%);
+     padding: 90px 0 100px;
+     position: relative;
+     overflow: hidden;
+     border-bottom-left-radius: 48px;
+     border-bottom-right-radius: 48px;
+     margin-bottom: 2rem;
+     background-image: url('https://previews.123rf.com/images/rrrainbow/rrrainbow1402/rrrainbow140200052/25772166-vegetable-section-in-the-big-city-supermarket.jpg');
+ }
+
+ .hero-section::before {
+     content: "🍃";
+     font-size: 280px;
+     opacity: 0.1;
+     position: absolute;
+     bottom: -40px;
+     right: -30px;
+     pointer-events: none;
+     font-family: monospace;
+ }
+
+ .hero-section::after {
+     content: "🥬";
+     font-size: 180px;
+     opacity: 0.08;
+     position: absolute;
+     top: 20px;
+     left: -30px;
+     pointer-events: none;
+ }
+
+ .hero-section h1 {
+     font-size: 3.5rem;
+     font-weight: 800;
+     background: linear-gradient(135deg, #eef5f0, #eceeec);
+     background-clip: text;
+     -webkit-background-clip: text;
+     color: transparent;
+     letter-spacing: -0.02em;
+     margin-bottom: 1rem;
+ }
+
+ .hero-section p {
+     font-size: 1.25rem;
+     color: #edeeed;
+     max-width: 550px;
+     margin: 0 auto 2rem auto;
+     font-weight: 500;
+ }
+
+ .btn-hero {
+     background: #f4f8f5;
+     border: none;
+     padding: 14px 36px;
+     font-size: 1.1rem;
+     font-weight: 600;
+     border-radius: 60px;
+     color: rgb(43, 175, 76);
+     transition: all 0.3s ease;
+     box-shadow: 0 8px 20px rgba(44, 110, 60, 0.2);
+     display: inline-flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .btn-hero:hover {
+     background: #1e532b;
+     transform: translateY(-3px);
+     box-shadow: 0 14px 28px rgba(44, 110, 60, 0.3);
+     color: white;
+ }
+
+ /* ========== SECTION TITLES ========== */
+ .section-title {
+     font-size: 2.2rem;
+     font-weight: 700;
+     letter-spacing: -0.01em;
+     margin-bottom: 2rem;
+     position: relative;
+     display: inline-block;
+ }
+
+ .section-title:after {
+     content: '';
+     display: block;
+     width: 65px;
+     height: 4px;
+     background: #4c9a2a;
+     border-radius: 4px;
+     margin-top: 10px;
+ }
+
+ /* ========== CATEGORY CARDS (modern glassmorphism & soft shadows) ========== */
+ .category-card {
+     border-radius: 32px;
+     padding: 2rem 1rem;
+     text-align: center;
+     transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+     cursor: pointer;
+     box-shadow: 0 12px 22px -12px rgba(0, 0, 0, 0.1);
+     backdrop-filter: blur(0px);
+     background: white !important;
+     /* fallback, but we keep gradient background but make it lighter */
+     position: relative;
+     overflow: hidden;
+ }
+
+ /* Keep the original gradient but blend with white overlay for softer look */
+ .category-card i {
+     font-size: 3.2rem;
+     margin-bottom: 0.8rem;
+     color: #1f2a3e;
+     transition: transform 0.2s;
+ }
+
+ .category-card h4 {
+     font-weight: 700;
+     font-size: 1.5rem;
+     margin-bottom: 0.3rem;
+     color: #1f2a3e;
+ }
+
+ .category-card p {
+     font-size: 0.9rem;
+     font-weight: 500;
+     color: #214468;
+     margin-bottom: 0;
+ }
+
+ .category-card:hover {
+     transform: translateY(-8px);
+     box-shadow: 0 24px 36px -16px rgba(0, 0, 0, 0.2);
+ }
+
+ .category-card:hover i {
+     transform: scale(1.05);
+ }
+
+ /* category backgrounds - we keep the original gradient style but ensure text readable */
+ /* The inline styles will add gradient, but to unify we set background blend */
+ .category-card {
+     background-size: cover;
+     background-blend-mode: overlay;
+ }
+
+ /* ========== PRODUCT CARDS (elevated, clean) ========== */
+ .product-section {
+     padding: 60px 0;
+     background: #ffffff;
+     border-radius: 48px 48px 0 0;
+     margin-top: 20px;
+     box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.02);
+ }
+
+ .product-card {
+     background: white;
+     border-radius: 28px;
+     overflow: hidden;
+     transition: all 0.3s ease;
+     box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.08);
+     margin-bottom: 28px;
+     border: 1px solid rgba(0, 0, 0, 0.04);
+ }
+
+ .product-card:hover {
+     transform: translateY(-6px);
+     box-shadow: 0 22px 32px -14px rgba(0, 0, 0, 0.15);
+ }
+
+ .product-image {
+     width: 100%;
+     height: 210px;
+     object-fit: cover;
+     transition: transform 0.5s;
+ }
+
+ .product-card:hover .product-image {
+     transform: scale(1.02);
+ }
+
+ .product-info {
+     padding: 1.2rem 1.2rem 1.5rem;
+ }
+
+ .product-title {
+     font-weight: 700;
+     font-size: 1.1rem;
+     margin-bottom: 0.4rem;
+     color: #1f2a3e;
+ }
+
+ .product-price {
+     font-weight: 800;
+     font-size: 1.3rem;
+     color: #2c6e3c;
+     letter-spacing: -0.3px;
+ }
+
+ .btn-add-cart {
+     background: #f5f2ea;
+     border: none;
+     width: 100%;
+     padding: 10px 0;
+     border-radius: 60px;
+     font-weight: 600;
+     font-size: 0.9rem;
+     color: #2c6e3c;
+     transition: all 0.2s;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 8px;
+ }
+
+ .btn-add-cart:hover {
+     background: #2c6e3c;
+     color: white;
+ }
+
+ /* ========== FOOTER (earthy & modern) ========== */
+ footer {
+     background: #1e2a2e;
+     color: #e9ecef;
+     padding: 60px 0 30px;
+     border-top-left-radius: 42px;
+     border-top-right-radius: 42px;
+     margin-top: 40px;
+ }
+
+ footer h5 {
+     font-weight: 700;
+     margin-bottom: 1.2rem;
+     position: relative;
+     display: inline-block;
+     color: #d4e6c3;
+ }
+
+ footer a {
+     color: #cbd5e0;
+     text-decoration: none;
+     transition: color 0.2s;
+ }
+
+ footer a:hover {
+     color: #a3e635;
+     text-decoration: underline;
+ }
+
+ footer .social-icons a {
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     width: 38px;
+     height: 38px;
+     background: #2d3e42;
+     border-radius: 50%;
+     margin-right: 12px;
+     transition: 0.2s;
+ }
+
+ footer .social-icons a:hover {
+     background: #4c9a2a;
+     color: white;
+     transform: translateY(-3px);
+ }
+
+ hr {
+     opacity: 0.2;
+     background-color: #a3b5a4;
+ }
+
+ /* responsive spacing */
+ @media (max-width: 768px) {
+     .hero-section h1 {
+         font-size: 2.3rem;
+     }
+
+     .section-title {
+         font-size: 1.8rem;
+     }
+
+     .category-card {
+         padding: 1.4rem 0.5rem;
+         margin-bottom: 1rem;
+     }
+
+     .category-card i {
+         font-size: 2.5rem;
+     }
+
+     .product-image {
+         height: 170px;
+     }
+ }
+
+ /* subtle custom alert for "no products" */
+ .text-muted-custom {
+     background: #f8f9fa;
+     padding: 2rem;
+     border-radius: 42px;
+     font-weight: 500;
+ }
+
+ /* Remove default link underline on category */
+ .text-decoration-none {
+     text-decoration: none;
+ }
+
+ /* ensure consistent row gap */
+ .row {
+     row-gap: 1.8rem;
+ }
+
+ /* form button style (add to cart form) */
+ form .btn-add-cart {
+     cursor: pointer;
+     font-weight: 600;
+     transition: all 0.2s;
+ }
+
+ /* override a tag hover for category cards */
+ .category-card {
+     transition: all 0.3s;
+ }
+
+ .navbar {
+     backdrop-filter: blur(10px);
+     background: rgba(0, 0, 0, 0.8) !important;
+ }
+
+ .nav-link {
+     transition: all 0.3s ease;
+ }
+
+ .nav-link:hover {
+     color: #00ff88 !important;
+     transform: scale(1.05);
+ }
+
+ .navbar-brand {
+     font-size: 1.5rem;
+     letter-spacing: 1px;
+ }
+
+ .btn-success {
+     background: linear-gradient(45deg, #00c853, #64dd17);
+     border: none;
+ }
+
+ .btn-success:hover {
+     background: linear-gradient(45deg, #00e676, #76ff03);
+ }

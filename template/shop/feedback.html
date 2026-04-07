@@ -1,0 +1,157 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Feedback - Grocery Store{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='shop/feedback.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <div class="container">
+            <h1>We Value Your Feedback</h1>
+            <p>Help us improve our service</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="feedback-form">
+                    <h3 class="text-center mb-4">Share Your Experience</h3>
+
+                    <form action="{{ url_for('customer.feedback') }}" method="POST">
+                        <div class="mb-4 text-center">
+                            <label class="form-label fw-bold">How would you rate your overall experience?</label>
+                            <div class="rating-stars mt-2">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                            <input type="hidden" name="rating" id="rating" value="0">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Order Number (Optional)</label>
+                            <input type="text" name="order_number" class="form-control" placeholder="e.g., #ORD-12345">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">What did you like the most?</label>
+                            <select name="liked_most" class="form-select">
+                                <option value="Product Quality">Product Quality</option>
+                                <option value="Delivery Speed">Delivery Speed</option>
+                                <option value="Customer Service">Customer Service</option>
+                                <option value="Pricing">Pricing</option>
+                                <option value="Website Experience">Website Experience</option>
+                                <option value="Packaging">Packaging</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Your Feedback</label>
+                            <textarea name="message" class="form-control" rows="5" placeholder="Tell us about your experience..."
+                                required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Suggestions for Improvement</label>
+                            <textarea name="suggestions" class="form-control" rows="3"
+                                placeholder="How can we serve you better?"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="contact_requested" id="contact">
+                                <label class="form-check-label" for="contact">
+                                    I would like to be contacted regarding my feedback
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn-submit">
+                                Submit Feedback <i class="fas fa-paper-plane ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-star fa-3x text-warning mb-3"></i>
+                    <h5>Quality Guaranteed</h5>
+                    <p class="text-muted">We ensure the freshest products</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-truck fa-3x text-success mb-3"></i>
+                    <h5>Fast Delivery</h5>
+                    <p class="text-muted">Quick and reliable shipping</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-headset fa-3x text-info mb-3"></i>
+                    <h5>24/7 Support</h5>
+                    <p class="text-muted">Always here to help you</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        // Rating stars functionality
+        const stars = document.querySelectorAll('.rating-stars i');
+        const ratingInput = document.getElementById('rating');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function () {
+                const rating = parseInt(this.dataset.rating);
+                ratingInput.value = rating;
+
+                // Update star display
+                stars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                    } else {
+                        s.classList.remove('fas');
+                        s.classList.add('far');
+                    }
+                });
+            });
+
+            star.addEventListener('mouseover', function () {
+                const rating = parseInt(this.dataset.rating);
+                stars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                    }
+                });
+            });
+
+            star.addEventListener('mouseout', function () {
+                const currentRating = parseInt(ratingInput.value);
+                stars.forEach((s, index) => {
+                    if (index < currentRating) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                    } else {
+                        s.classList.remove('fas');
+                        s.classList.add('far');
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

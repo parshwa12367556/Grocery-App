@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>FreshHarvest | Organic Grocery Store</title>
+    <!-- Bootstrap 5 CSS (minimal, but we override heavily) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: modern, clean, friendly -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='shop/index.css') }}">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- Modern Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+                🛒 GroceryHub
+            </a>
+
+            <!-- Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <!-- Left Menu -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('product_bp.products') }}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('customer.about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('customer.contact') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('customer.track_order') }}">Track Order</a>
+                    </li>
+                </ul>
+
+                <!-- Right Side -->
+                <ul class="navbar-nav align-items-center">
+
+                    <!-- Cart -->
+                    <li class="nav-item me-3">
+                        <a class="nav-link position-relative" href="{{ url_for('customer.cart') }}">
+                            🛍️
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ cart_count }}
+                            </span>
+                        </a>
+                    </li>
+                    <!-- Login/Register/Profile -->
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link text-white fw-bold me-2" href="{{ url_for('customer.profile') }}">
+                            <i class="fas fa-user-circle me-1"></i> {{ current_user.username }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-danger rounded-pill" href="{{ url_for('customer.logout') }}">
+                            Logout
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light me-2 rounded-pill" href="{{ url_for('customer.login') }}">
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-success rounded-pill" href="{{ url_for('customer.register') }}">
+                            Sign Up
+                        </a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HERO SECTION - FRESH & INVITING ========== -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1>FreshHarvest Market</h1>
+            <p>From local farms to your table — organic produce, artisanal goods & daily essentials, delivered with
+                care.</p>
+            <a href="{{ url_for('product_bp.products') }}" class="btn btn-hero" >Explore Collection <i
+                    class="fas fa-leaf ms-1"></i></a>
+        </div>
+    </section>
+
+    <!-- ========== CATEGORIES SECTION (improved visual but keeping original structure with dynamic URLs) ========== -->
+    <section class="category-section py-4">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="row g-4">
+                <!-- categories with fresh gradient backgrounds but enhanced styling -->
+                <div class="col-md-3 col-sm-6">
+                    <a href="#" class="text-decoration-none category-link" data-category="fruits">
+                        <div class="category-card"
+                            style="background: linear-gradient(135deg, #e0f7e8 0%, #c1f0cf 100%);">
+                            <i class="fas fa-apple-alt"></i>
+                            <h4>Fruits</h4>
+                            <p>Farm-fresh & Juicy</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#" class="text-decoration-none category-link" data-category="vegetables">
+                        <div class="category-card"
+                            style="background: linear-gradient(135deg, #ffe6e8 0%, #ffd1d6 100%);">
+                            <i class="fas fa-carrot"></i>
+                            <h4>Vegetables</h4>
+                            <p>Organic & Healthy</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#" class="text-decoration-none category-link" data-category="stationeries">
+                        <div class="category-card"
+                            style="background: linear-gradient(135deg, #e0f0ff 0%, #cae3fc 100%);">
+                            <i class="fas fa-pencil-ruler"></i>
+                            <h4>Stationeries</h4>
+                            <p>School & Office</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#" class="text-decoration-none category-link" data-category="groceries">
+                        <div class="category-card"
+                            style="background: linear-gradient(135deg, #fff3db 0%, #fee6b6 100%);">
+                            <i class="fas fa-utensils"></i>
+                            <h4>Groceries</h4>
+                            <p>Daily Essentials</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#" class="text-decoration-none category-link" data-category="dairy">
+                        <div class="category-card"
+                            style="background: linear-gradient(135deg, #e2f0fc 0%, #cce5fc 100%);">
+                            <i class="fas fa-cheese"></i>
+                            <h4>Dairy</h4>
+                            <p>Milk & Butter</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#" class="text-decoration-none category-link" data-category="bakery">
+                        <div class="category-card"
+                            style="background: linear-gradient(135deg, #ffe0b5 0%, #ffcd94 100%);">
+                            <i class="fas fa-bread-slice"></i>
+                            <h4>Bakery</h4>
+                            <p>Freshly Baked</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#" class="text-decoration-none category-link" data-category="beverages">
+                        <div class="category-card"
+                            style="background: linear-gradient(135deg, #e5eef4 0%, #d4e2ed 100%);">
+                            <i class="fas fa-mug-hot"></i>
+                            <h4>Beverages</h4>
+                            <p>Coffee & Tea</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#" class="text-decoration-none category-link" data-category="snacks">
+                        <div class="category-card"
+                            style="background: linear-gradient(135deg, #e7def5 0%, #d8cdf0 100%);">
+                            <i class="fas fa-cookie-bite"></i>
+                            <h4>Snacks</h4>
+                            <p>Crunchy & Tasty</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FEATURED PRODUCTS SECTION ========== -->
+    <section class="product-section">
+        <div class="container">
+            <h2 class="section-title">Fresh Picks</h2>
+            <div class="row" id="productsRow">
+                <!-- dynamic products will be rendered here via javascript (mock data to simulate backend, but with full visual transformation) -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>🌱 About FreshHarvest</h5>
+                    <p>We bring farm-to-fork freshness, organic quality and sustainable groceries right to your
+                        doorstep. 100% satisfaction.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#" id="footerProductsLink">All Products</a></li>
+                        <li><a href="#">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Info</h5>
+                    <p><i class="fas fa-phone me-2"></i> +1 (555) 372-8901</p>
+                    <p><i class="fas fa-envelope me-2"></i> hello@freshharvest.com</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-3">
+            <div class="text-center mt-3">
+                <p>&copy; 2025 FreshHarvest Market. All rights reserved. <i class="fas fa-seedling"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script id="featured-products-data" type="application/json">
+        [
+            {% for product in products %}
+            {
+                "id": {{ product.id | tojson }},
+                "name": {{ product.name | tojson }},
+                "price": {{ product.price | tojson }},
+                "image": "{% if product.image %}{% if product.image.startswith('http') %}{{ product.image }}{% else %}{{ url_for('static', filename='images/products/' + product.image) }}{% endif %}{% else %}https://via.placeholder.com/300x200?text=Fresh+Harvest{% endif %}",
+                "category": "{{ product.category.lower() if product.category else 'groceries' }}",
+                "is_authentic": true,
+                "featured": true
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ]
+    </script>
+    <script>
+        // ---------- MOCK PRODUCT DATABASE (fresh produce, stationery, groceries etc) ----------
+        const allProducts = JSON.parse(document.getElementById('featured-products-data').textContent);
+
+        let featuredProducts = allProducts;
+
+        // Helper function to render products into row
+        function renderProducts(productsArray) {
+            const container = document.getElementById('productsRow');
+            if (!container) return;
+            if (!productsArray.length) {
+                container.innerHTML = `<div class="col-12 text-center py-5"><div class="text-muted-custom"><i class="fas fa-carrot fa-2x mb-3"></i><p class="mb-0">No products available at the moment, but fresh harvest is coming!</p></div></div>`;
+                return;
+            }
+
+            let html = '';
+            for (let prod of productsArray) {
+                // use placeholder if image fails, but unsplash images are reliable
+                const imgSrc = prod.image && prod.image.trim() !== '' ? prod.image : 'https://via.placeholder.com/300x200?text=Fresh+Harvest';
+                html += `
+          <div class="col-md-3 col-sm-6">
+            <div class="product-card">
+              <a href="/product/${prod.id}" class="text-decoration-none">
+                <img src="${imgSrc}" class="product-image" alt="${prod.name}">
+              </a>
+              <div class="product-info">
+                <h5 class="product-title">${prod.name}</h5>
+                ${prod.is_authentic ? '<div class="mb-2"><span class="badge bg-success bg-opacity-10 text-success border border-success" style="font-size: 0.65rem; border-radius: 12px;"><i class="fas fa-shield-check me-1"></i> Authentic</span></div>' : ''}
+                <div class="product-price">₹${prod.price.toFixed(2)}</div>
+                <form action="/add-to-cart/${prod.id}" method="POST">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" class="btn-add-cart mt-2"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        `;
+            }
+            container.innerHTML = html;
+        }
+
+        // initial render: featured products
+        renderProducts(featuredProducts);
+
+        // Category click simulation (mimic url_for behavior but filter products)
+        const categoryLinks = document.querySelectorAll('.category-link');
+        categoryLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const category = link.getAttribute('data-category');
+                if (category) {
+                    const filtered = allProducts.filter(prod => prod.category === category);
+                    if (filtered.length) {
+                        renderProducts(filtered);
+                        // scroll to product section smoothly
+                        document.querySelector('.product-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        // update section title for better UX
+                        const titleElem = document.querySelector('.product-section .section-title');
+                        if (titleElem) {
+                            let catDisplay = category.charAt(0).toUpperCase() + category.slice(1);
+                            titleElem.innerHTML = `${catDisplay} Selection`;
+                            // add back original after? but keep fresh
+                            setTimeout(() => {
+                                titleElem.innerHTML = `Fresh Picks`;
+                            }, 3000);
+                        }
+                    } else {
+                        renderProducts([]);
+                    }
+                }
+            });
+        });
+
+        // Shop Now button behavior: reset to featured products
+        const shopBtn = document.getElementById('shopNowBtn');
+        if (shopBtn) {
+            shopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderProducts(featuredProducts);
+                document.querySelector('.product-section').scrollIntoView({ behavior: 'smooth' });
+                const titleElem = document.querySelector('.product-section .section-title');
+                if (titleElem) titleElem.innerHTML = `Fresh Picks`;
+            });
+        }
+
+        // footer products link reset
+        const footerProducts = document.getElementById('footerProductsLink');
+        if (footerProducts) {
+            footerProducts.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderProducts(featuredProducts);
+                document.querySelector('.product-section').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // small improvement for contact/about links (prevent page reload & show demo)
+        const aboutLinks = document.querySelectorAll('footer a, .quick-links a');
+        document.querySelectorAll('footer a:not([href="#"])').forEach(anchor => {
+            if (anchor.getAttribute('href') === '#') return;
+            anchor.addEventListener('click', (e) => {
+                if (anchor.innerText.includes('About') || anchor.innerText.includes('Contact') || anchor.innerText.includes('Cart')) {
+                    e.preventDefault();
+                    alert(`🚀 This is a modern demo layout. In your Flask app, these links would route to proper pages. Enjoy the fresh look!`);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

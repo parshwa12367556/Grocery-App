@@ -1,0 +1,63 @@
+grocery_store/
+├── app.py
+├── admin.py
+├── product.py
+├── customer.py
+├── requirements.txt
+├── database/
+│   └── grocery.db
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── main.js
+│   └── images/
+│       └── products/
+├── templates/
+│   ├── admin/
+│   │   ├── dashboard.html
+│   │   ├── prod_category.html
+│   │   ├── order_list.html
+│   │   ├── customer_list.html
+│   │   ├── add_product.html
+│   │   ├── edit_product.html
+│   │   ├── prod_category.html
+│   │   ├── notification.html
+│   │   ├── setting.html
+│   │   ├── add_product.html
+│   │   ├── manage_product.html
+│   │   ├── delivery_person.html
+│   │   └── dp_details.html
+│   ├── shop/
+│   │   ├── index.html
+│   │   ├── about.html
+│   │   ├── contact.html
+│   │   ├── products.html
+│   │   ├── cart.html
+│   │   ├── checkout.html
+│   │   ├── order.html
+│   │   ├── profile.html
+│   │   ├── stationeries.html
+│   │   ├── groceries.html
+│   │   ├── fruits.html
+│   │   ├── vegetables.html
+│   │   ├── dairy.html
+│   │   ├── bakery.html
+│   │   ├── beverages.html
+│   │   ├── snacks.html
+│   │   ├── household.html
+│   │   ├── personal_care.html
+│   │   ├── order_confirmation.html
+│   │   ├── feedback.html
+│   │   ├── thank_you.html
+│   │   └── product_detail.html
+│   ├── layout/
+│   │   ├── 404.html
+│   │   ├── 200.html
+│   │   ├── base.html
+│   │   └── 500.html
+│   └── auth/
+│       ├── login.html
+         ├── register.html
+         ├── forgot_password.html
+         └── reset_password.html

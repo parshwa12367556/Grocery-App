@@ -1,0 +1,106 @@
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+   }
+
+   body {
+       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+       min-height: 100vh;
+   }
+
+   .register-container {
+       min-height: 100vh;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       padding: 20px;
+   }
+
+   .register-card {
+       background: white;
+       border-radius: 20px;
+       padding: 40px;
+       width: 100%;
+       max-width: 500px;
+       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+       animation: fadeInUp 0.5s ease;
+   }
+
+   @keyframes fadeInUp {
+       from {
+           opacity: 0;
+           transform: translateY(30px);
+       }
+
+       to {
+           opacity: 1;
+           transform: translateY(0);
+       }
+   }
+
+   .register-header {
+       text-align: center;
+       margin-bottom: 30px;
+   }
+
+   .register-header i {
+       font-size: 3rem;
+       color: #28a745;
+   }
+
+   .form-control {
+       border-radius: 10px;
+       padding: 12px;
+       border: 1px solid #ddd;
+   }
+
+   .btn-register {
+       background-color: #28a745;
+       color: white;
+       padding: 12px;
+       border-radius: 10px;
+       width: 100%;
+       font-size: 1rem;
+       border: none;
+       transition: all 0.3s;
+   }
+
+   .btn-register:hover {
+       background-color: #218838;
+       transform: translateY(-2px);
+   }
+
+   .login-link {
+       text-align: center;
+       margin-top: 20px;
+   }
+
+   .login-link a {
+       color: #28a745;
+       text-decoration: none;
+   }
+
+   .nav-link {
+       transition: all 0.3s ease;
+   }
+
+   .nav-link:hover {
+       color: #00ff88 !important;
+       transform: scale(1.05);
+   }
+
+   .navbar-brand {
+       font-size: 1.5rem;
+       letter-spacing: 1px;
+   }
+
+   .btn-success {
+       background: linear-gradient(45deg, #00c853, #64dd17);
+       border: none;
+   }
+
+   .btn-success:hover {
+       background: linear-gradient(45deg, #00e676, #76ff03);
+   }
